@@ -12,8 +12,10 @@ from entities import Physics
 
 #The Game
 class Game:
+    #Setup
     def __init__(self):
         pygame.init()
+        self.start_ticks = pygame.time.get_ticks()
         self.hitbox = pygame.display.set_mode((1280, 650))
         self.screen = pygame.display.set_mode((1280, 650))#1280, 650
         pygame.display.set_caption('Dread')
@@ -22,14 +24,16 @@ class Game:
         self.x = 50
         self.y = 50
         self.speed = 4
+        self.right = True 
+        self.i_frame = 500
+        #self.Bullet = Bullet
         self.player = Physics(self, 'Player', [self.x, self.y])
         self.enemy = Physics(self, 'Enemy', [1180, 50])
         self.player.entity()
         self.health = self.player.health
         self.enemy.entity()
-    
-
         
+    #Refresh Screen
     def refresh(self):
         pygame.display.update()
         self.clock.tick(60)
@@ -37,12 +41,24 @@ class Game:
         self.screen.fill((0, 48, 9))
         self.player.entity()
         self.enemy.entity()
+        #self.Bullet.update([self.x, self.y])
         
+    #Main Loop    
     def run(self):
-        #Main Loop
         while True:
-            if  self.player.hitbox.colliderect(self.enemy.hitbox):
-                self.player.health -= 1
+            #Hit Detection
+            seconds = (pygame.time.get_ticks() - self.start_ticks)
+            if self.i_frame < seconds:
+                if  self.player.hitbox.colliderect(self.enemy.hitbox):
+                    self.player.health -= 1
+                    self.start_ticks = pygame.time.get_ticks()
+            #screen Borders
+            if self.player.x <= 0:
+                self.player.x = 10
+            if self.player.x >= 1230:
+                self.player.x = 1220
+            
+            #Enemy Tracking
             if self.player.x > self.enemy.x:
                 self.enemy.x += self.speed -2
             elif self.player.x < self.enemy.x:
@@ -53,9 +69,11 @@ class Game:
                 self.player.x += self.speed
             if self.movex[0] > self.movex[1]:
                 self.player.x -= self.speed
-            #falling
+                
+            #moving
             self.player.gravity()
             self.enemy.gravity()
+            
             #events
             for event in pygame.event.get():
                 #'x' button clicked
@@ -63,22 +81,30 @@ class Game:
                     pygame.quit()
                     print('Game Over')
                     sys.exit
+                #mouse pressed
+                #if event.type == pygame.MOUSEBUTTONDOWN:
+                    #Shooting
+                    #if event.button == 1:
+                        #pass
+                        
                 #key pressed
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         if self.player.y == 550:
                             self.player.y = 300
                         
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         self.movex[0] = True
-                    if event.key == pygame.K_RIGHT:
+                        self.right = False
+                    if event.key == pygame.K_d:
                         self.movex[1] = True
+                        self.right = True
                         
                 #key released
                 if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         self.movex[0] = False 
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_d:
                         self.movex[1] = False 
             
             #refresh screen
