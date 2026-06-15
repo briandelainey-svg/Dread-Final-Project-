@@ -18,8 +18,8 @@ from pygame.locals import *
 import pygame.rect
 
 try:
-	import Tkinter as tk
-	from tk import filedialog
+	import tkinter
+	from tkinter import filedialog
 except:
 	try:
 		from tkinter import ttk
@@ -133,7 +133,7 @@ class map_maker():
 			self.save(filename)
 		
 	def load_paint(self):
-		filename = tkFileDialog.askopenfilename(defaultextension='.mpy', filetypes=[('supported', ('*.mpy', '*.png', '*.jpg', '*.bmp')), ('map files', '*.mpy'), ('tilesets', ('*.png', '*.jpg', '*.bmp'))])
+		filename = filedialog.askopenfilename(defaultextension='.mpy', filetypes=[('supported', ('*.mpy', '*.png', '*.jpg', '*.bmp')), ('map files', '*.mpy'), ('tilesets', ('*.png', '*.jpg', '*.bmp'))])
 		if filename.endswith(".mpy"):
 			try:
 				pickle_open = open(filename, 'rb')

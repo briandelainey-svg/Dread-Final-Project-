@@ -26,7 +26,10 @@ class Game:
         self.speed = 4
         self.right = True 
         self.i_frame = 500
-        #self.Bullet = Bullet
+        self.bg = pygame.transform.scale(pygame.image.load("pyg_map_maker/asset_pack/Assets/Background_2.png"), (1280, 650))
+        self.bg.set_colorkey((0, 0, 0))
+        self.ground = pygame.transform.scale(pygame.image.load("pyg_map_maker/asset_pack/Assets/ground.png"), (1280, 650))
+        self.ground.set_colorkey((0, 0, 0))
         self.player = Physics(self, 'Player', [self.x, self.y])
         self.enemy = Physics(self, 'Enemy', [1180, 50])
         self.player.entity()
@@ -38,7 +41,8 @@ class Game:
         pygame.display.update()
         self.clock.tick(60)
         self.hitbox
-        self.screen.fill((0, 48, 9))
+        self.screen.blit(self.bg, (0, 0))
+        self.screen.blit(self.ground, (0, 0))
         self.player.entity()
         self.enemy.entity()
         #self.Bullet.update([self.x, self.y])
@@ -82,10 +86,10 @@ class Game:
                     print('Game Over')
                     sys.exit
                 #mouse pressed
-                #if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.type == pygame.MOUSEBUTTONDOWN:
                     #Shooting
-                    #if event.button == 1:
-                        #pass
+                    if event.button == 1:
+                        pass
                         
                 #key pressed
                 if event.type == pygame.KEYDOWN:

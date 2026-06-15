@@ -16,38 +16,40 @@ class Physics():
     def entity(self):
         #check Enity type
         if self.type == 'Player':
+            self.model = pygame.transform.scale(pygame.image.load("pyg_map_maker/asset_pack/Assets/Charecter_Sprite1.png"), (60, 80))
+            self.model.set_colorkey((0, 0, 0))
             #player hitbox(don't touch)
-            self.hitbox = pygame.draw.rect(self.Game.hitbox, (0, 0, 0), (self.x, self.y, 50, 80))
+            self.hitbox = pygame.draw.rect(self.Game.hitbox, (0, 0, 0), (self.x, self.y, 60, 80))
             self.hitbox
             #player model
-            pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y, 50, 80))
+            self.Game.screen.blit(self.model, (self.x, self.y))
             #health Bar
             if self.health >= 5:
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 10, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 20, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 30, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 40, self.y - 20, 9, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 14, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 28, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 42, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 56, self.y - 10, 12, 10))
             elif self.health == 4:
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 10, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 20, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 30, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 40, self.y - 20, 9, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 14, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 28, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 42, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 56, self.y - 10, 12, 10))
             elif self.health == 3:
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 10, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 20, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 30, self.y - 20, 19, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 14, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 28, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 42, self.y - 10, 22, 10))
             elif self.health == 2:
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 10, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 20, self.y - 20, 29, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x + 14, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 28, self.y - 10, 32, 10))
             elif self.health == 1:
-                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 20, 9, 10))
-                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 10, self.y - 20, 39, 10))
+                pygame.draw.rect(self.Game.screen, (0, 255, 0), (self.x, self.y - 10, 12, 10))
+                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x + 14, self.y - 10, 46, 10))
             else:
-                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x, self.y - 20, 50, 10))
+                pygame.draw.rect(self.Game.screen, (255, 0, 0), (self.x, self.y - 10, 60, 10))
                 
             
         if self.type == 'Enemy':
